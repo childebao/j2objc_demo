@@ -18,6 +18,10 @@
 		AE8372E31714C170008F7AAF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE8372E21714C170008F7AAF /* Default-568h@2x.png */; };
 		AE8372E61714C170008F7AAF /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE8372E41714C170008F7AAF /* MainStoryboard.storyboard */; };
 		AE8372E91714C170008F7AAF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8372E81714C170008F7AAF /* ViewController.m */; };
+		AE8372FC1714D970008F7AAF /* BubbleSortAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8372F51714D970008F7AAF /* BubbleSortAlgorithm.m */; };
+		AE8372FD1714D970008F7AAF /* ItemType.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8372F71714D970008F7AAF /* ItemType.m */; };
+		AE8372FE1714D970008F7AAF /* SortableItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8372F91714D970008F7AAF /* SortableItem.m */; };
+		AE8372FF1714D970008F7AAF /* SortingAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8372FB1714D970008F7AAF /* SortingAlgorithm.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +41,14 @@
 		AE8372E51714C170008F7AAF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		AE8372E71714C170008F7AAF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		AE8372E81714C170008F7AAF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		AE8372F41714D970008F7AAF /* BubbleSortAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubbleSortAlgorithm.h; sourceTree = "<group>"; };
+		AE8372F51714D970008F7AAF /* BubbleSortAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BubbleSortAlgorithm.m; sourceTree = "<group>"; };
+		AE8372F61714D970008F7AAF /* ItemType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemType.h; sourceTree = "<group>"; };
+		AE8372F71714D970008F7AAF /* ItemType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemType.m; sourceTree = "<group>"; };
+		AE8372F81714D970008F7AAF /* SortableItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortableItem.h; sourceTree = "<group>"; };
+		AE8372F91714D970008F7AAF /* SortableItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortableItem.m; sourceTree = "<group>"; };
+		AE8372FA1714D970008F7AAF /* SortingAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortingAlgorithm.h; sourceTree = "<group>"; };
+		AE8372FB1714D970008F7AAF /* SortingAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortingAlgorithm.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +95,7 @@
 		AE8372D21714C170008F7AAF /* J2ObjcDemoApp */ = {
 			isa = PBXGroup;
 			children = (
+				AE8372EF1714D970008F7AAF /* gen */,
 				AE8372DB1714C170008F7AAF /* AppDelegate.h */,
 				AE8372DC1714C170008F7AAF /* AppDelegate.m */,
 				AE8372E41714C170008F7AAF /* MainStoryboard.storyboard */,
@@ -105,6 +118,54 @@
 				AE8372E21714C170008F7AAF /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AE8372EF1714D970008F7AAF /* gen */ = {
+			isa = PBXGroup;
+			children = (
+				AE8372F01714D970008F7AAF /* com */,
+			);
+			name = gen;
+			path = ../../gen;
+			sourceTree = "<group>";
+		};
+		AE8372F01714D970008F7AAF /* com */ = {
+			isa = PBXGroup;
+			children = (
+				AE8372F11714D970008F7AAF /* jambit */,
+			);
+			path = com;
+			sourceTree = "<group>";
+		};
+		AE8372F11714D970008F7AAF /* jambit */ = {
+			isa = PBXGroup;
+			children = (
+				AE8372F21714D970008F7AAF /* j2ojbcdemoapp */,
+			);
+			path = jambit;
+			sourceTree = "<group>";
+		};
+		AE8372F21714D970008F7AAF /* j2ojbcdemoapp */ = {
+			isa = PBXGroup;
+			children = (
+				AE8372F31714D970008F7AAF /* util */,
+			);
+			path = j2ojbcdemoapp;
+			sourceTree = "<group>";
+		};
+		AE8372F31714D970008F7AAF /* util */ = {
+			isa = PBXGroup;
+			children = (
+				AE8372F41714D970008F7AAF /* BubbleSortAlgorithm.h */,
+				AE8372F51714D970008F7AAF /* BubbleSortAlgorithm.m */,
+				AE8372F61714D970008F7AAF /* ItemType.h */,
+				AE8372F71714D970008F7AAF /* ItemType.m */,
+				AE8372F81714D970008F7AAF /* SortableItem.h */,
+				AE8372F91714D970008F7AAF /* SortableItem.m */,
+				AE8372FA1714D970008F7AAF /* SortingAlgorithm.h */,
+				AE8372FB1714D970008F7AAF /* SortingAlgorithm.m */,
+			);
+			path = util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,6 +237,10 @@
 				AE8372D91714C170008F7AAF /* main.m in Sources */,
 				AE8372DD1714C170008F7AAF /* AppDelegate.m in Sources */,
 				AE8372E91714C170008F7AAF /* ViewController.m in Sources */,
+				AE8372FC1714D970008F7AAF /* BubbleSortAlgorithm.m in Sources */,
+				AE8372FD1714D970008F7AAF /* ItemType.m in Sources */,
+				AE8372FE1714D970008F7AAF /* SortableItem.m in Sources */,
+				AE8372FF1714D970008F7AAF /* SortingAlgorithm.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,8 +291,19 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../gen,
+					"../../j2objc-0.6.1/include",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = "../../j2objc-0.6.1/lib";
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-ljre_emul",
+					"-ObjC",
+					"-force_load",
+					"../../j2objc-0.6.1/lib/libjre_emul.a",
+				);
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -250,8 +326,19 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../gen,
+					"../../j2objc-0.6.1/include",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = "../../j2objc-0.6.1/lib";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = (
+					"-ljre_emul",
+					"-ObjC",
+					"-force_load",
+					"../../j2objc-0.6.1/lib/libjre_emul.a",
+				);
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
