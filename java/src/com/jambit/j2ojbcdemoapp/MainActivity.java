@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 
 import com.jambit.j2ojbcdemoapp.util.BubbleSortAlgorithm;
+import com.jambit.j2ojbcdemoapp.util.ItemType;
 import com.jambit.j2ojbcdemoapp.util.SortableItem;
 import com.jambit.j2ojbcdemoapp.util.SortingAlgorithm;
 
@@ -26,16 +27,16 @@ public class MainActivity extends Activity {
         this.sortingAlgorithm = new BubbleSortAlgorithm();
         
         List<SortableItem> aBunchOfItems = new ArrayList<SortableItem>();
-        aBunchOfItems.add(new SortableItem(5, "Item number five", SortableItem.ItemType.MEDIUM_ITEM));
-        aBunchOfItems.add(new SortableItem(9, "Item number nine", SortableItem.ItemType.BIG_ITEM));
-        aBunchOfItems.add(new SortableItem(0, "Item number zero", SortableItem.ItemType.SMALL_ITEM));
-        aBunchOfItems.add(new SortableItem(7, "Item number seven", SortableItem.ItemType.BIG_ITEM));
-        aBunchOfItems.add(new SortableItem(3, "Item number three", SortableItem.ItemType.MEDIUM_ITEM));
-        aBunchOfItems.add(new SortableItem(8, "Item number eight", SortableItem.ItemType.SMALL_ITEM));
-        aBunchOfItems.add(new SortableItem(1, "Item number one", SortableItem.ItemType.SMALL_ITEM));
-        aBunchOfItems.add(new SortableItem(6, "Item number six", SortableItem.ItemType.BIG_ITEM));
-        aBunchOfItems.add(new SortableItem(4, "Item number four", SortableItem.ItemType.MEDIUM_ITEM));
-        aBunchOfItems.add(new SortableItem(2, "Item number two", SortableItem.ItemType.MEDIUM_ITEM));
+        aBunchOfItems.add(new SortableItem(5, "Item number five", ItemType.MEDIUM_ITEM));
+        aBunchOfItems.add(new SortableItem(9, "Item number nine", ItemType.BIG_ITEM));
+        aBunchOfItems.add(new SortableItem(0, "Item number zero", ItemType.SMALL_ITEM));
+        aBunchOfItems.add(new SortableItem(7, "Item number seven", ItemType.BIG_ITEM));
+        aBunchOfItems.add(new SortableItem(3, "Item number three", ItemType.MEDIUM_ITEM));
+        aBunchOfItems.add(new SortableItem(8, "Item number eight", ItemType.SMALL_ITEM));
+        aBunchOfItems.add(new SortableItem(1, "Item number one", ItemType.SMALL_ITEM));
+        aBunchOfItems.add(new SortableItem(6, "Item number six", ItemType.BIG_ITEM));
+        aBunchOfItems.add(new SortableItem(4, "Item number four", ItemType.MEDIUM_ITEM));
+        aBunchOfItems.add(new SortableItem(2, "Item number two", ItemType.MEDIUM_ITEM));
         
         Log.d(TAG, "Unsorted List: " + aBunchOfItems);
         Log.d(TAG, "Sorted List: " + this.sortingAlgorithm.sortByKey(aBunchOfItems));

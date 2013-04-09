@@ -2,12 +2,6 @@ package com.jambit.j2ojbcdemoapp.util;
 
 public class SortableItem {
 	
-	public enum ItemType {
-		BIG_ITEM,
-		MEDIUM_ITEM,
-		SMALL_ITEM
-	}
-	
 	private Integer key;
 	
 	private String value;
