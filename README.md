@@ -119,6 +119,7 @@ Für ein ARC Projekt muss man zudem den converter mit dem `-use-arc` Parameter l
 #### Oder
 
     # git checkout STEP_3
+    # j2objc-0.6.1/j2objc -use-arc -sourcepath java/src -d objc/gen com/jambit/j2ojbcdemoapp/util/BubbleSortAlgorithm.java com/jambit/j2ojbcdemoapp/util/SortingAlgorithm.java com/jambit/j2ojbcdemoapp/util/SortableItem.java objc/gen com/jambit/j2ojbcdemoapp/util/ItemType.java
     
 #### Findings aus STEP_3
 
