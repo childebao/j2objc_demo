@@ -113,6 +113,7 @@ Unsere Business-Logic ist also jetzt konvertiert. Fehlt nur noch...:
 * Other linker flags setzen: (`-ljre_emul -ObjC -force_load ../../j2objc-0.6.1/lib/libjre_emul.a`)
 
 Für ein ARC Projekt muss man zudem den converter mit dem `-use-arc` Parameter laufen lassen:
+
     # j2objc-0.6.1/j2objc -use-arc -sourcepath java/src -d objc/gen com/jambit/j2ojbcdemoapp/util/BubbleSortAlgorithm.java com/jambit/j2ojbcdemoapp/util/SortingAlgorithm.java com/jambit/j2ojbcdemoapp/util/SortableItem.java objc/gen com/jambit/j2ojbcdemoapp/util/ItemType.java
 
 #### Oder
