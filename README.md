@@ -11,6 +11,8 @@ Das git Repository in dem ich die Demo entwickelt habe ist bei github gehostet. 
 
     # git clone https://github.com/schroepf/j2objc_demo.git
 
+## Die Demo
+
 ### STEP_0: Ausganssituation:
 
     # git checkout STEP_0
@@ -59,18 +61,18 @@ Gleich mal versuchen:
 
 Zweiter Versuch:
 
-    # j2objc-0.6.1/j2objc -sourcepath java/src -d objc/gen com/jambit/j2ojbcdemoapp/util/ItemType.java
+    # j2objc-0.6.1/j2objc -sourcepath java/src -d objc/gen com/jambit/j2ojbcdemoapp/util/SortableItem.java
     
 -> Falsches Verzeichnis. Man muss analog zum `javac` den `-sourcepath` parameter angeben
 
 Dritter Versuch:
 
-    # j2objc-0.6.1/j2objc -sourcepath java/src -d objc/gen com/jambit/j2ojbcdemoapp/util/ItemType.java
+    # j2objc-0.6.1/j2objc -sourcepath java/src -d objc/gen com/jambit/j2ojbcdemoapp/util/SortableItem.java
     # cat objc/gen/com/jambit/j2ojbcdemoapp/util/ItemType.h
     
 -> Juhu! Code! ... gleich weiter:
 
-    # j2objc-0.6.1/j2objc -sourcepath java/src -d objc/gen com/jambit/j2ojbcdemoapp/util/SortableItem.java
+    # j2objc-0.6.1/j2objc -sourcepath java/src -d objc/gen com/jambit/j2ojbcdemoapp/util/ItemType.java
     # j2objc-0.6.1/j2objc -sourcepath java/src -d objc/gen com/jambit/j2ojbcdemoapp/util/SortingAlgorithm.java
     # j2objc-0.6.1/j2objc -sourcepath java/src -d objc/gen com/jambit/j2ojbcdemoapp/util/BubbleSortAlgorithm.java
 
@@ -96,11 +98,13 @@ Unsere Business-Logic ist also jetzt konvertiert. Fehlt nur noch...:
 
 #### Findings aus STEP_2
 
-- j2objc verwendet als Ausgangsbasis Java Source Code (**Sämtlicher Code der konvertiert werden soll muss samt Abhängigkeiten im Quelltext vorliegen**)
-- Java Enums werden nicht nur in ein `typedef enum` konvertiert sondern auch in eine Klasse, die für jeden Enum-Wert eine statische Methode anbietet
-- Aus den Java Paketen werden Präfixe für den jeweiligen konvertierten Klassen-Namen (dieses Verhalten kann aber über ein Mapping beeinflusst werden)
-- Ein Java Interface wird straight-forward zu einem Objective-C protocol
-- Praktisch: Die `toString()` Methode von `SortableItem` wurde zum Objective-C counterpart `description`
+* j2objc verwendet als Ausgangsbasis Java Source Code (**Sämtlicher Code der konvertiert werden soll muss samt Abhängigkeiten im Quelltext vorliegen**)
+* Java Enums werden nicht nur in ein `typedef enum` konvertiert sondern auch in eine Klasse, die für jeden Enum-Wert eine statische Methode anbietet
+* Aus den Java Paketen werden Präfixe für den jeweiligen konvertierten Klassen-Namen (dieses Verhalten kann aber über ein Mapping beeinflusst werden)
+* Ein Java Interface wird straight-forward zu einem Objective-C protocol
+* Praktisch: Die `toString()` Methode von `SortableItem` wurde zum Objective-C counterpart `description`
+* Nicht alles kann konvertiert werden. Code der nicht in der JRE emulation enthalten ist bzw. nicht im SourceCode vorliegt kann nicht konvertiert werden.
+
 
 ### STEP_3: XCode project setup
 
@@ -137,17 +141,27 @@ Für ein ARC Projekt muss man zudem den converter mit dem `-use-arc` Parameter l
 
 Der Code dafür sieht so aus:
 
+Notwendige Imports:
+
+    #import "java/util/ArrayList.h"
+    #import "SortableItem.h"
+    #import "ItemType.h"
+    #import "java/lang/Integer.h"
+    #import "BubbleSortAlgorithm.h"
+    
+Verwenden der generierten Klassen:
+
     id<JavaUtilList> aBunchOfItems = [[JavaUtilArrayList alloc] init];    
-    [((id<JavaUtilList>) NIL_CHK(aBunchOfItems)) addWithId:[[ComJambitJ2ojbcdemoappUtilSortableItem alloc] initWithJavaLangInteger:[JavaLangInteger valueOfWithInt:5] withNSString:@"Item number five" withComJambitJ2ojbcdemoappUtilItemTypeEnum:[ComJambitJ2ojbcdemoappUtilItemTypeEnum MEDIUM_ITEM]]];
-    [((id<JavaUtilList>) NIL_CHK(aBunchOfItems)) addWithId:[[ComJambitJ2ojbcdemoappUtilSortableItem alloc] initWithJavaLangInteger:[JavaLangInteger valueOfWithInt:9] withNSString:@"Item number nine" withComJambitJ2ojbcdemoappUtilItemTypeEnum:[ComJambitJ2ojbcdemoappUtilItemTypeEnum BIG_ITEM]]];
-    [((id<JavaUtilList>) NIL_CHK(aBunchOfItems)) addWithId:[[ComJambitJ2ojbcdemoappUtilSortableItem alloc] initWithJavaLangInteger:[JavaLangInteger valueOfWithInt:0] withNSString:@"Item number zero" withComJambitJ2ojbcdemoappUtilItemTypeEnum:[ComJambitJ2ojbcdemoappUtilItemTypeEnum SMALL_ITEM]]];
-    [((id<JavaUtilList>) NIL_CHK(aBunchOfItems)) addWithId:[[ComJambitJ2ojbcdemoappUtilSortableItem alloc] initWithJavaLangInteger:[JavaLangInteger valueOfWithInt:7] withNSString:@"Item number seven" withComJambitJ2ojbcdemoappUtilItemTypeEnum:[ComJambitJ2ojbcdemoappUtilItemTypeEnum BIG_ITEM]]];
-    [((id<JavaUtilList>) NIL_CHK(aBunchOfItems)) addWithId:[[ComJambitJ2ojbcdemoappUtilSortableItem alloc] initWithJavaLangInteger:[JavaLangInteger valueOfWithInt:3] withNSString:@"Item number three" withComJambitJ2ojbcdemoappUtilItemTypeEnum:[ComJambitJ2ojbcdemoappUtilItemTypeEnum MEDIUM_ITEM]]];
-    [((id<JavaUtilList>) NIL_CHK(aBunchOfItems)) addWithId:[[ComJambitJ2ojbcdemoappUtilSortableItem alloc] initWithJavaLangInteger:[JavaLangInteger valueOfWithInt:8] withNSString:@"Item number eight" withComJambitJ2ojbcdemoappUtilItemTypeEnum:[ComJambitJ2ojbcdemoappUtilItemTypeEnum SMALL_ITEM]]];
-    [((id<JavaUtilList>) NIL_CHK(aBunchOfItems)) addWithId:[[ComJambitJ2ojbcdemoappUtilSortableItem alloc] initWithJavaLangInteger:[JavaLangInteger valueOfWithInt:1] withNSString:@"Item number one" withComJambitJ2ojbcdemoappUtilItemTypeEnum:[ComJambitJ2ojbcdemoappUtilItemTypeEnum SMALL_ITEM]]];
-    [((id<JavaUtilList>) NIL_CHK(aBunchOfItems)) addWithId:[[ComJambitJ2ojbcdemoappUtilSortableItem alloc] initWithJavaLangInteger:[JavaLangInteger valueOfWithInt:6] withNSString:@"Item number six" withComJambitJ2ojbcdemoappUtilItemTypeEnum:[ComJambitJ2ojbcdemoappUtilItemTypeEnum BIG_ITEM]]];
-    [((id<JavaUtilList>) NIL_CHK(aBunchOfItems)) addWithId:[[ComJambitJ2ojbcdemoappUtilSortableItem alloc] initWithJavaLangInteger:[JavaLangInteger valueOfWithInt:4] withNSString:@"Item number four" withComJambitJ2ojbcdemoappUtilItemTypeEnum:[ComJambitJ2ojbcdemoappUtilItemTypeEnum MEDIUM_ITEM]]];
-    [((id<JavaUtilList>) NIL_CHK(aBunchOfItems)) addWithId:[[ComJambitJ2ojbcdemoappUtilSortableItem alloc] initWithJavaLangInteger:[JavaLangInteger valueOfWithInt:2] withNSString:@"Item number two" withComJambitJ2ojbcdemoappUtilItemTypeEnum:[ComJambitJ2ojbcdemoappUtilItemTypeEnum MEDIUM_ITEM]]];
+    [((id<JavaUtilList>) aBunchOfItems) addWithId:[[ComJambitJ2ojbcdemoappUtilSortableItem alloc] initWithJavaLangInteger:[JavaLangInteger valueOfWithInt:5] withNSString:@"Item number five" withComJambitJ2ojbcdemoappUtilItemTypeEnum:[ComJambitJ2ojbcdemoappUtilItemTypeEnum MEDIUM_ITEM]]];
+    [((id<JavaUtilList>) aBunchOfItems) addWithId:[[ComJambitJ2ojbcdemoappUtilSortableItem alloc] initWithJavaLangInteger:[JavaLangInteger valueOfWithInt:9] withNSString:@"Item number nine" withComJambitJ2ojbcdemoappUtilItemTypeEnum:[ComJambitJ2ojbcdemoappUtilItemTypeEnum BIG_ITEM]]];
+    [((id<JavaUtilList>) aBunchOfItems) addWithId:[[ComJambitJ2ojbcdemoappUtilSortableItem alloc] initWithJavaLangInteger:[JavaLangInteger valueOfWithInt:0] withNSString:@"Item number zero" withComJambitJ2ojbcdemoappUtilItemTypeEnum:[ComJambitJ2ojbcdemoappUtilItemTypeEnum SMALL_ITEM]]];
+    [((id<JavaUtilList>) aBunchOfItems) addWithId:[[ComJambitJ2ojbcdemoappUtilSortableItem alloc] initWithJavaLangInteger:[JavaLangInteger valueOfWithInt:7] withNSString:@"Item number seven" withComJambitJ2ojbcdemoappUtilItemTypeEnum:[ComJambitJ2ojbcdemoappUtilItemTypeEnum BIG_ITEM]]];
+    [((id<JavaUtilList>) aBunchOfItems) addWithId:[[ComJambitJ2ojbcdemoappUtilSortableItem alloc] initWithJavaLangInteger:[JavaLangInteger valueOfWithInt:3] withNSString:@"Item number three" withComJambitJ2ojbcdemoappUtilItemTypeEnum:[ComJambitJ2ojbcdemoappUtilItemTypeEnum MEDIUM_ITEM]]];
+    [((id<JavaUtilList>) aBunchOfItems) addWithId:[[ComJambitJ2ojbcdemoappUtilSortableItem alloc] initWithJavaLangInteger:[JavaLangInteger valueOfWithInt:8] withNSString:@"Item number eight" withComJambitJ2ojbcdemoappUtilItemTypeEnum:[ComJambitJ2ojbcdemoappUtilItemTypeEnum SMALL_ITEM]]];
+    [((id<JavaUtilList>) aBunchOfItems) addWithId:[[ComJambitJ2ojbcdemoappUtilSortableItem alloc] initWithJavaLangInteger:[JavaLangInteger valueOfWithInt:1] withNSString:@"Item number one" withComJambitJ2ojbcdemoappUtilItemTypeEnum:[ComJambitJ2ojbcdemoappUtilItemTypeEnum SMALL_ITEM]]];
+    [((id<JavaUtilList>) aBunchOfItems) addWithId:[[ComJambitJ2ojbcdemoappUtilSortableItem alloc] initWithJavaLangInteger:[JavaLangInteger valueOfWithInt:6] withNSString:@"Item number six" withComJambitJ2ojbcdemoappUtilItemTypeEnum:[ComJambitJ2ojbcdemoappUtilItemTypeEnum BIG_ITEM]]];
+    [((id<JavaUtilList>) aBunchOfItems) addWithId:[[ComJambitJ2ojbcdemoappUtilSortableItem alloc] initWithJavaLangInteger:[JavaLangInteger valueOfWithInt:4] withNSString:@"Item number four" withComJambitJ2ojbcdemoappUtilItemTypeEnum:[ComJambitJ2ojbcdemoappUtilItemTypeEnum MEDIUM_ITEM]]];
+    [((id<JavaUtilList>) aBunchOfItems) addWithId:[[ComJambitJ2ojbcdemoappUtilSortableItem alloc] initWithJavaLangInteger:[JavaLangInteger valueOfWithInt:2] withNSString:@"Item number two" withComJambitJ2ojbcdemoappUtilItemTypeEnum:[ComJambitJ2ojbcdemoappUtilItemTypeEnum MEDIUM_ITEM]]];
     
     ComJambitJ2ojbcdemoappUtilBubbleSortAlgorithm *sortingAlgorithm = [ComJambitJ2ojbcdemoappUtilBubbleSortAlgorithm new];
     id<JavaUtilList> sortedList = [sortingAlgorithm sortByKeyWithJavaUtilList:aBunchOfItems];
@@ -162,3 +176,9 @@ Der Code dafür sieht so aus:
 
 * die API des generierten Codes ist nicht wirklich schön und gut lesbar
 * aber sie funktioniert
+
+## Sum up
+
+* j2objc eignet sich zur Konvertierung von Business-Logik => Alle Abhängigkeiten müssen sich auf die JRE Emulation zurückführen lassen
+* der generierte Code ist nicht schön => Viele Konstrukte aus Java lassen sich nicht 1:1 in Objective-C überführen (enums, packages). Deshalb sieht der generierte Code oft komplexer aus als er sein müsste.
+* aber er funktioniert => Wenn man die API nicht veröffentlichen muss ist j2objc tatsächlich eine Alternative zur doppelten Implementierung des Codes
